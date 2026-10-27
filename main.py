@@ -18,9 +18,9 @@ async def lifespan(app):
 app = FastAPI(lifespan=lifespan)  # Создаём сервис; документация доступна по адресу /docs.
 
 
-@app.get("/")
-def read_root():
-    return {"status": "ok", "message": "Gravity API is running"}
+@app.get("/health")
+def health_check():
+    return {"status": "healthy"}
 
 
 @app.post("/predict")  # Принимаем данные методом POST, а не через адресную строку.
