@@ -18,6 +18,11 @@ async def lifespan(app):
 app = FastAPI(lifespan=lifespan)  # Создаём сервис; документация доступна по адресу /docs.
 
 
+@app.get("/")
+def read_root():
+    return {"status": "ok", "message": "Gravity API is running"}
+
+
 @app.post("/predict")  # Принимаем данные методом POST, а не через адресную строку.
 def predict(rows: list[dict[str, float]], request: Request, output: Literal["json", "html"] = "json"):
     """Передать список строк с координатами и девятью признаками из terrain_demo.csv."""
